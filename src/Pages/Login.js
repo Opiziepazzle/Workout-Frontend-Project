@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import {UseLogin} from "../Hooks/UseLogin"
-
+import { UseLogin } from "../Hooks/UseLogin";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -9,7 +8,6 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     await login(email, password);
   };
 
@@ -25,17 +23,23 @@ const Login = () => {
         type="email"
         onChange={(e) => setEmail(e.target.value)}
         value={email}
+        required
       />
+
       <label>Password</label>
       <input
         type="password"
         onChange={(e) => setPassword(e.target.value)}
         value={password}
+        required
       />
 
-      <button disabled={isLoading} className="bg-green-600 p-2.5 text-white font-[Poppins] rounded pointer justify-center">
-        Log in
+      <button 
+        disabled={isLoading} 
+        className={`bg-green-600 p-2.5 text-white font-[Poppins] rounded justify-center ${isLoading ? 'cursor-not-allowed' : 'cursor-pointer'}`}>
+        {isLoading ? "Logging in..." : "Log in"}
       </button>
+      
       {error && <div className="text-red-500 border-2 border-red-400 p-4 m-3">{error}</div>}
     </form>
   );

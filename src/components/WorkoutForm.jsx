@@ -1,10 +1,13 @@
-import { useState } from "react";
-import { useWorkoutsContext } from "../Hooks/useWorkoutsContext";
-import { useAuthContext } from "../Hooks/UseAuthContext";
+
+
+
+import React, { useState } from 'react';
+import { useWorkoutsContext } from '../Hooks/useWorkoutsContext';
+import { useAuthContext } from '../Hooks/UseAuthContext';
 
 const WorkoutForm = () => {
   const { dispatch } = useWorkoutsContext();
-  const {user} = useAuthContext()
+  const { user } = useAuthContext();
 
   const [title, setTitle] = useState("");
   const [load, setLoad] = useState("");
@@ -14,39 +17,46 @@ const WorkoutForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // If the user is not logged in
     if (!user) {
-        setError('You must be logged in')
-        return
+      setError("You must be logged in");
+      return;
     }
+
     const workout = { title, load, reps };
 
-    const response = await fetch("/workout", {
-      method: "POST",
+    // Send POST request to create a new workout
+    const response = await fetch('/api/workouts', {
+      method: 'POST',
       body: JSON.stringify(workout),
       headers: {
-        "Content-Type": "application/json",
-        'Authorization': `Bearer ${user.token}`,
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${user.token}`,
       },
     });
+
     const json = await response.json();
 
+    // Handle the response
     if (!response.ok) {
       setError(json.error);
-      setEmptyFields(json.emptyFields);
-    }
-    if (response.ok) {
+      setEmptyFields(json.emptyFields || []);
+    } else {
+      // Clear the form and state
       setTitle("");
       setLoad("");
       setReps("");
       setError(null);
       setEmptyFields([]);
-      // console.log('workout added', json)
-      dispatch({ type: "CREATE_WORKOUT", payload: json });
+
+      // Dispatch the newly created workout to update the global state
+      dispatch({ type: 'CREATE_WORKOUT', payload: json });
     }
   };
 
   return (
-    <form className="max-w-xs justify-center" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="max-w-xs justify-center">
       <h1 className="text-2xl font-bold">Add a New Workout</h1>
 
       <label className="block">Exercise Title:</label>
@@ -56,6 +66,7 @@ const WorkoutForm = () => {
         onChange={(e) => setTitle(e.target.value)}
         value={title}
       />
+
       <label className="block">Load (in kg):</label>
       <input
         className={emptyFields.includes("load") ? "error" : ""}
@@ -63,6 +74,7 @@ const WorkoutForm = () => {
         onChange={(e) => setLoad(e.target.value)}
         value={load}
       />
+
       <label className="block">Reps:</label>
       <input
         className={emptyFields.includes("reps") ? "error" : ""}
@@ -71,12 +83,15 @@ const WorkoutForm = () => {
         value={reps}
       />
 
-      <button className="bg-green-600 p-2.5 text-white font-[Poppins] rounded pointer justify-center hover:bg-green-400">
+      <button
+        className="bg-green-600 p-2.5 text-white font-[Poppins] rounded pointer justify-center hover:bg-green-400"
+      >
         Add Workout
       </button>
+
       {error && (
         <div className="p-2.5 bg-gray-100 border-2 border-red-500 text-red-500 rounded my-5 mx-0">
-          {error}{" "}
+          {error}
         </div>
       )}
     </form>

@@ -3,14 +3,14 @@ import { useAuthContext } from "./UseAuthContext";
 
 export const UseLogin = () => {
   const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const { dispatch } = useAuthContext();
 
   const login = async (email, password) => {
     setIsLoading(true);
     setError(null);
 
-    const response = await fetch("/users/login", {
+    const response = await fetch("https://theworkoutapplication.onrender.com/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -36,3 +36,7 @@ export const UseLogin = () => {
 };
 
 // export default UseLogin;
+
+
+
+

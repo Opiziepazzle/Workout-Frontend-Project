@@ -1,38 +1,81 @@
+// import { useState } from "react";
+// import { useAuthContext } from "./UseAuthContext";
+
+// const UseSIgnup = () => {
+// const [error, setError] = useState(null)
+// const [isLoading, setIsLoading] = useState(false)
+// const { dispatch } = useAuthContext()
+
+// const signup = async (email, password) => {
+//     setIsLoading(true)
+//     setError(null)
+    
+//     const response = await fetch('https://theworkoutapplication.onrender.com/users/signup', {
+//         method: 'POST',
+//         headers: {'Content-Type' : 'application/json'},
+//         body: JSON.stringify({email, password })
+//     })
+//     const json = await response.json()
+
+//     if (!response.ok) {
+//        setIsLoading(false)
+//        setError(json.error) 
+//     }
+//     if (response.ok) {
+//         // save login
+//         localStorage.setItem('user', JSON.stringify(json))
+
+//         // update auth context
+//         dispatch({type: 'LOGIN' , payload: json })
+
+//         setIsLoading(false)
+//     }
+// }
+
+//   return {signup, isLoading, error}
+// };
+
+// export default UseSIgnup;
+
+
+
 import { useState } from "react";
 import { useAuthContext } from "./UseAuthContext";
 
-const UseSIgnup = () => {
-const [error, setError] = useState(null)
-const [isLoading, setIsLoading] = useState(null)
-const { dispatch } = useAuthContext()
+const UseSignup = () => {
+  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);  // Initialize to false
+  const { dispatch } = useAuthContext();
 
-const signup = async (email, password) => {
-    setIsLoading(true)
-    setError(null)
-    
-    const response = await fetch('/users/signup', {
-        method: 'POST',
-        headers: {'Content-Type' : 'application/json'},
-        body: JSON.stringify({email, password })
-    })
-    const json = await response.json()
+  const signup = async (email, password) => {
+    setIsLoading(true);
+    setError(null);
+
+    const response = await fetch('https://theworkoutapplication.onrender.com/users/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const json = await response.json();
 
     if (!response.ok) {
-       setIsLoading(false)
-       setError(json.error) 
+      setIsLoading(false);
+      setError(json.error);
     }
+
     if (response.ok) {
-        // save login
-        localStorage.setItem('user', JSON.stringify(json))
+      // save signup
+      localStorage.setItem('user', JSON.stringify(json));
 
-        // update auth context
-        dispatch({type: 'LOGIN' , payload: json })
+      // update auth context
+      dispatch({ type: 'LOGIN', payload: json });
 
-        setIsLoading(false)
+      setIsLoading(false);
     }
-}
+  };
 
-  return {signup, isLoading, error}
+  return { signup, isLoading, error };
 };
 
-export default UseSIgnup;
+export default UseSignup;
