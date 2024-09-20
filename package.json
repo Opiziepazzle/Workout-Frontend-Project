@@ -1,6 +1,6 @@
 {
   "name": "frontend",
-   "proxy": "https://theworkoutapplication.onrender.com",
+  "proxy": "https://theworkoutapplication.onrender.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
