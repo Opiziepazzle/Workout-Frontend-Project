@@ -1,6 +1,3 @@
-
-
-
 import React, { useState } from 'react';
 import { useWorkoutsContext } from '../Hooks/useWorkoutsContext';
 import { useAuthContext } from '../Hooks/UseAuthContext';

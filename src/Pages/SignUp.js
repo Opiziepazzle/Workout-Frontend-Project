@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import UseSignup from "../Hooks/UseSignup";
+import UseSignup from "../Hooks/UseSignup";  // This assumes Signup.js is in the Pages directory
 import { useNavigate } from "react-router-dom";  // Import useNavigate
 
 const Signup = () => {

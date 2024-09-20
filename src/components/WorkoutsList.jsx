@@ -1,4 +1,3 @@
-
 import React, { useEffect } from 'react';
 import { useWorkoutsContext } from '../Hooks/useWorkoutsContext';
 import WorkoutDetails from './WorkoutDetails';

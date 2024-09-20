@@ -1,4 +1,3 @@
-
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 import { useWorkoutsContext } from "../Hooks/useWorkoutsContext";
 import { useAuthContext } from "../Hooks/UseAuthContext";
