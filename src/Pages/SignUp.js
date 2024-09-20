@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import UseSignup from "../Hooks/UseSignup";  // This assumes Signup.js is in the Pages directory
+import UseSIgnup from "../Hooks/UseSIgnup";  // This assumes Signup.js is in the Pages directory
 import { useNavigate } from "react-router-dom";  // Import useNavigate
 
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signup, isLoading, error } = UseSignup();
+  const { signup, isLoading, error } = UseSIgnup();
   const navigate = useNavigate();  // Initialize useNavigate
 
   const handleSubmit = async (e) => {
