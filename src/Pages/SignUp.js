@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";  // Import useNavigate
 const Signup = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { signup, isLoading, error } = UseSignup();
+  const { signup, isLoading, error } = UseSIgnup();
   const navigate = useNavigate();  // Initialize useNavigate
 
   const handleSubmit = async (e) => {
